@@ -1,7 +1,7 @@
 
 package com.example.demo;
 
-import Biblioteca.BibliotecaApplication; // ⬅️ Importa la clase principal del paquete correcto
+import Biblioteca.BibliotecaApplication; 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

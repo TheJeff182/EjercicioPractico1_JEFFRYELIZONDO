@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 import Biblioteca.domain.TipoQueja; 
 
-@Data // Mantenemos @Data, aunque hemos añadido métodos manuales para los campos del formulario.
+@Data
 @Entity
 @Table(name = "queja")
 public class Queja implements Serializable {
@@ -21,15 +21,12 @@ public class Queja implements Serializable {
     @Column(name = "id")
     private Long id;
     
-    // ----------------------------------------------------------------------
-    // CAMPOS DEL FORMULARIO CON GETTERS/SETTERS EXPLÍCITOS (Solución al error)
-    // ----------------------------------------------------------------------
 
     @Size(max = 150)
     @Column(name = "nombre_cliente", length = 150)
     private String nombreCliente;
 
-    // GETTER/SETTER explícitos para nombreCliente
+  
     public String getNombreCliente() { return nombreCliente; }
     public void setNombreCliente(String nombreCliente) { this.nombreCliente = nombreCliente; }
 
@@ -38,7 +35,7 @@ public class Queja implements Serializable {
     @Column(name = "email", length = 200)
     private String email;
 
-    // GETTER/SETTER explícitos para email
+   
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
@@ -46,7 +43,7 @@ public class Queja implements Serializable {
     @Column(name = "telefono", length = 30)
     private String telefono;
 
-    // GETTER/SETTER explícitos para telefono
+ 
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
 
@@ -54,7 +51,7 @@ public class Queja implements Serializable {
     @Column(name = "tipo", nullable = false)
     private TipoQueja tipo;
 
-    // GETTER/SETTER explícitos para tipo
+   
     public TipoQueja getTipo() { return tipo; }
     public void setTipo(TipoQueja tipo) { this.tipo = tipo; }
 
@@ -70,7 +67,7 @@ public class Queja implements Serializable {
     @Column(name = "mensaje", columnDefinition = "TEXT", nullable = false)
     private String mensaje;
 
-    // GETTER/SETTER explícitos para mensaje
+
     public String getMensaje() { return mensaje; }
     public void setMensaje(String mensaje) { this.mensaje = mensaje; }
 
@@ -82,7 +79,7 @@ public class Queja implements Serializable {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    // Método de ciclo de vida JPA
+   
     @PrePersist
     public void prePersist() {
         if (this.createdAt == null) {

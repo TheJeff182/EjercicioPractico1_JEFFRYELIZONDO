@@ -25,9 +25,7 @@ public class Categoria implements Serializable {
     @Column(name = "nombre", nullable = false, length = 100, unique = true)
     private String nombre;
 
-    // ********************************************************
-    // AÑADIDO PARA SOLUCIONAR EL ERROR DEL GETTER DE LOMBOK
-    // ********************************************************
+ 
     public String getNombre() {
         return nombre;
     }
@@ -35,15 +33,13 @@ public class Categoria implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    // ********************************************************
+
     
     @Size(max = 255, message = "La descripción no debe exceder los 255 caracteres")
     @Column(name = "descripcion", length = 255)
     private String descripcion;
     
-    // ********************************************************
-    // OPCIONAL: Añadir G/S para descripción si da un error similar
-    // ********************************************************
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -51,7 +47,7 @@ public class Categoria implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    // ********************************************************
+   
 
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -60,7 +56,7 @@ public class Categoria implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    // Relacion una a muchos
+   
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private List<Libro> libros;
     

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LibroRepository extends JpaRepository<Libro, Long> {
     
-    // Metodo para encontrar libros por ID de categoría 
+  
     List<Libro> findByCategoriaId(Long categoriaId);
     
-    // Mtodo para obtener el último libro
+  
     Libro findTopByOrderByCreatedAtDesc();
     
     

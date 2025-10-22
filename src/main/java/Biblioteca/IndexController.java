@@ -17,19 +17,18 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
         
-        // 1. Añadir el objeto queja 
+      
         if (!model.containsAttribute("queja")) {
              model.addAttribute("queja", new Queja());
         }
         
-        // 2. Añadir el objeto nuevoLibro
+       
         model.addAttribute("nuevoLibro", libroService.getNuevoLibro());
         
-        // 3. CORRECCIÓN: Pasar los tipos de queja usando el nombre 'tiposQueja'
-        // para que coincida con lo que el HTML espera.
-        model.addAttribute("tiposQueja", TipoQueja.values()); // <--- ¡CAMBIADO DE "tipos" A "tiposQueja"!
+    
+        model.addAttribute("tiposQueja", TipoQueja.values()); 
         
-        // 4. Pasa la URL para el video incrustado
+    
         model.addAttribute("videoUrl", "https://youtu.be/C0DPdy98e4c?si=vWuWzlVPI7Wy0onU"); 
 
         return "index";

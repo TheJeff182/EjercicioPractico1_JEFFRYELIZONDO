@@ -64,7 +64,7 @@ public class Libro implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    // Relación ManyToOne: Muchos libros pertenecen a una categoría
+ 
     @ManyToOne(fetch = FetchType.EAGER) 
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
@@ -112,20 +112,43 @@ public class Libro implements Serializable {
         return isbn;
     }
     
-    // También para el binding del formulario (si usas th:field="*{autor}" en el formulario de creación/edición)
+
     public void setAutor(String autor) {
         this.autor = autor;
     }
+public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
 
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+    
+   
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+    
+ 
+    public void setTitulo(String titulo) {
+    this.titulo = titulo;
+    }
+    
+   public void setCategoria(Categoria categoria) {
+   this.categoria = categoria;
     }
     
     public BigDecimal getPrecio() {
     return precio;
 }
 
-// Y el setter, por si el formulario lo necesita para el binding:
 public void setPrecio(BigDecimal precio) {
     this.precio = precio;
 }
