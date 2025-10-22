@@ -62,7 +62,7 @@ public class Queja implements Serializable {
     @Column(name = "asunto", length = 200)
     private String asunto;
 
-    // GETTER/SETTER explícitos para asunto
+  
     public String getAsunto() { return asunto; }
     public void setAsunto(String asunto) { this.asunto = asunto; }
 
