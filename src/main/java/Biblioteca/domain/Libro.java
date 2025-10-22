@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data; 
+import jakarta.persistence.FetchType;
 
 @Data 
 @Entity
@@ -43,7 +44,15 @@ public class Libro implements Serializable {
     private LocalDate fechaPublicacion;
 
     @Column(name = "disponible", nullable = false)
-    private Boolean disponible = true; 
+    private Boolean disponible; 
+    
+    public Boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
 
     @DecimalMin(value = "0.00", message = "El precio no puede ser negativo")
     @Column(name = "precio", precision = 10, scale = 2)
@@ -56,8 +65,8 @@ public class Libro implements Serializable {
     private LocalDateTime updatedAt;
 
     // Relación ManyToOne: Muchos libros pertenecen a una categoría
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER) 
+    @JoinColumn(name = "id_categoria")
     private Categoria categoria;
     
     @PrePersist

@@ -27,13 +27,13 @@
                 <td th:text="${libro.titulo}"></td>
                 <td th:text="${libro.autor}"></td>
                 <td th:text="${libro.isbn}"></td>
-                <td th:text="${libro.categoria.nombre}"></td>
+                <td th:text="${libro.categoria != null} ? ${libro.categoria.nombre} : 'Sin categoría'">...</td>
                 <td th:text="${#numbers.formatDecimal(libro.precio, 1, 2)}"></td>
                 <td th:text="${libro.disponible ? 'Sí' : 'No'}"></td>
                 <td>
                     <a th:href="@{/libro/modificar/} + ${libro.id}">Editar</a> |
                     <a th:href="@{/libro/eliminar/} + ${libro.id}" 
-                       onclick="return confirm('¿Está seguro de eliminar este libro?')">Eliminar</a>
+                       onclick="return confirm('Esta seguro de eliminar este libro?')">Eliminar</a>
                 </td>
             </tr>
         </tbody>

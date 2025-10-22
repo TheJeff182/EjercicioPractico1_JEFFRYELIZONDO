@@ -1,0 +1,16 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="categoria : ${categorias}">
+            <td th:text="${categoria.id}">1</td>
+            <td th:text="${categoria.nombre}">Ficción</td>
+            <td th:text="${categoria.descripcion}">Libros de ficción.</td>
+        </tr>
+    </tbody>
+</table>
