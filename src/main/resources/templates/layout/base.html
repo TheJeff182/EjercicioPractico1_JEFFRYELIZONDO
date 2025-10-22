@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    
+    <title th:replace="${pageTitle}">Biblioteca App</title>
+    
+    <style>
+        /* Estilos básicos para usabilidad */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header, footer { background-color: #333; color: white; padding: 1em; text-align: center; }
+        nav { background-color: #555; padding: 0.5em; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
+        nav li { margin: 0 15px; }
+        nav a { color: white; text-decoration: none; font-weight: bold; }
+        main { padding: 20px; min-height: 80vh; background-color: white; margin: 20px auto; max-width: 1000px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+
+<body th:fragment="layout(pageTitle, pageContent)">
+
+    <header>
+        <h1>Gestión de Biblioteca</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Inicio</a></li>
+            <li><a th:href="@{/libro/listado}">Libros</a></li>
+            <li><a th:href="@{/categoria/listado}">Categorías</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div th:replace="${pageContent}">Contenido de la Página Específica</div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Biblioteca. Desarrollado con Spring Boot y Thymeleaf.</p>
+    </footer>
+
+</body>
+</html>

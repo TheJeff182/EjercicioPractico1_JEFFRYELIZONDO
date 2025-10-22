@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::#contenido-principal})}">
+<head>
+    <title>Página de Inicio</title>
+</head>
+<body>
+    <div id="contenido-principal">
+        
+        <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}">Su solicitud ha sido enviada con éxito.</div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}">Error al enviar la solicitud. Por favor, revise los campos.</div>
+        
+        <h2> Bienvenido al Sistema de Biblioteca</h2>
+        <p>A continuación, puedes ver el libro más reciente añadido a nuestro catálogo y enviar una queja o sugerencia.</p>
+
+        <section>
+            <h3 th:if="${nuevoLibro == null}">No hay libros registrados todavía.</h3>
+            
+            <div th:if="${nuevoLibro != null}">
+                <h3>Último Libro Añadido: <span th:text="${nuevoLibro.titulo}"></span></h3>
+                <p>
+                    <strong>Autor:</strong> <span th:text="${nuevoLibro.autor}"></span><br>
+                    <strong>ISBN:</strong> <span th:text="${nuevoLibro.isbn}"></span><br>
+                    <strong>Precio:</strong> <span th:text="${#numbers.formatCurrency(nuevoLibro.precio)}"></span>
+                </p>
+                <a th:href="@{/libro/detalle/__${nuevoLibro.id}__}">Ver Detalles</a>
+            </div>
+        </section>
+
+        <hr/>
+
+      <section id="formulario-quejas">
+            <h3> Formulario de Quejas, Consultas y Sugerencias</h3>
+            
+                        <form th:action="@{/enviar}" th:object="${queja}" method="post"> 
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="tipo">Tipo de Solicitud:</label>
+                    <select id="tipo" th:field="*{tipo}" class="form-control">
+                        <option th:each="tipo : ${tiposQueja}" th:value="${tipo}" th:text="${tipo.name()}">
+                            Tipo
+                        </option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="nombreCliente">Nombre Completo (Opcional):</label>
+                    <input type="text" id="nombreCliente" th:field="*{nombreCliente}" class="form-control"/>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="email">Email de Contacto:</label>
+                    <input type="email" id="email" th:field="*{email}" required class="form-control"/>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Error Email</p>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="telefono">Teléfono (Opcional):</label>
+                    <input type="tel" id="telefono" th:field="*{telefono}" class="form-control"/>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="asunto">Asunto:</label>
+                    <input type="text" id="asunto" th:field="*{asunto}" required class="form-control"/>
+                    <p th:if="${#fields.hasErrors('asunto')}" th:errors="*{asunto}" class="text-danger">Error Asunto</p>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="mensaje">Mensaje (Detalle su consulta/queja):</label>
+                    <textarea id="mensaje" th:field="*{mensaje}" rows="4" cols="50" required class="form-control"></textarea>
+                    <p th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}" class="text-danger">Error Mensaje</p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+            </form>
+        </section>
+        
+        </div>
+</body>
+</html>

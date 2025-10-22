@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::#contenido-principal})}">
+<head>
+    <title>Gestión de Libros</title>
+</head>
+<body>
+<div id="contenido-principal">
+    <h1>Listado de Libros</h1>
+    
+    <p><a th:href="@{/libro/nuevo}">Añadir Nuevo Libro</a></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Disponible</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.autor}"></td>
+                <td th:text="${libro.isbn}"></td>
+                <td th:text="${libro.categoria.nombre}"></td>
+                <td th:text="${#numbers.formatDecimal(libro.precio, 1, 2)}"></td>
+                <td th:text="${libro.disponible ? 'Sí' : 'No'}"></td>
+                <td>
+                    <a th:href="@{/libro/modificar/} + ${libro.id}">Editar</a> |
+                    <a th:href="@{/libro/eliminar/} + ${libro.id}" 
+                       onclick="return confirm('¿Está seguro de eliminar este libro?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
